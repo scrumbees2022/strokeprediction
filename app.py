@@ -3,17 +3,18 @@ from flask import Flask, render_template, request
 import joblib
 import numpy as np
 import pickle
-import os, sys
 
-## Making an instance of Flask
+# # Making an instance of Flask
 app = Flask(__name__)
+
+
 # Flask decorator to render the home page
 @app.route("/")
 def index():
     return render_template("home.html")
 
 
-## Getting the values from user
+# # Getting the values from user
 @app.route("/result", methods=["POST", "GET"])
 def result():
     gender = int(request.form["gender"])
@@ -41,19 +42,13 @@ def result():
             smoking_status,
         ]
     ).reshape(1, -1)
-    scaler_path = os.path.join(
-        "C:/Users/USER/Documents/Renju/Ineuron/Projects/StrokePrediction/",
-        "models/scaler.pkl",
-    )
+    scaler_path = "./models/scaler.pkl"
     scaler = None
     with open(scaler_path, "rb") as scaler_file:
         scaler = pickle.load(scaler_file)
     x = scaler.transform(x)
 
-    model_path = os.path.join(
-        "C:/Users/USER/Documents/Renju/Ineuron/Projects/StrokePrediction/",
-        "models/decisionTree.sav",
-    )
+    model_path = "./models/decisionTree.sav"
     print(model_path)
     decisionTree = joblib.load(model_path)
     Y_pred = decisionTree.predict(x)[0]
@@ -69,4 +64,3 @@ def result():
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
-
