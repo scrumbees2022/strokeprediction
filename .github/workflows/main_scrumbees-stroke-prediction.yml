@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'scrumbees-stroke-prediction'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E0800EB825FA4F9B94B63BBB10A13D7B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_63DE01EC59B74BDBA45F908D11CAA012 }}
